@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using Agora.Rtc;
 //using Agora_RTC_Plugin.API_Example.Examples.Basic.JoinChannelAudio;
 #if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID)
 using UnityEngine.Android;
 #endif
 
-public class JoinChannelAudio : MonoBehaviour
+
+public class JoinAudioChannel : MonoBehaviour
 {
     // Fill in your app ID
     private string _appID = "59fc3d61f2c040e29397e550c21db127";
@@ -21,6 +23,12 @@ public class JoinChannelAudio : MonoBehaviour
 private ArrayList permissionList = new ArrayList() { Permission.Microphone };
 #endif
     // Start is called before the first frame update
+    [SerializeField]
+    private TextMeshProUGUI _statusText;
+    //public TextMeshProUGUI  _remoteUserText;
+
+
+
     void Start()
     {
         SetupAudioSDKEngine();
@@ -42,22 +50,26 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
             RtcEngine = null;
         }
     }
-    private void CheckPermissions()
+    private void CheckPermissions() //android permission
     {
-#if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID)
-    foreach (string permission in permissionList) {
-        if (!Permission.HasUserAuthorizedPermission(permission)) {
-            Permission.RequestUserPermission(permission);
-        }
+        #if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID)
+                    foreach (string permission in permissionList) {
+                            if (!Permission.HasUserAuthorizedPermission(permission)) 
+                            {
+                                Permission.RequestUserPermission(permission);
+                            }
+                }
+                #endif
     }
-#endif
-    }
-    private void SetupUI()
+    private void SetupUI() // Button Assign
     {
         GameObject go = GameObject.Find("Leave");
         go.GetComponent<Button>().onClick.AddListener(Leave);
         go = GameObject.Find("Join");
         go.GetComponent<Button>().onClick.AddListener(Join);
+
+
+
     }
     private void SetupAudioSDKEngine()
     {
@@ -73,6 +85,7 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     public void Join()
     {
         Debug.Log("Joining" + _channelName);
+        _statusText.text = "Status:" + " " + _channelName.ToString()+ " " + "Joined";
         // Enable the audio module
         RtcEngine.EnableAudio();
         // Set channel media options
@@ -90,7 +103,8 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     }
     public void Leave()
     {
-        Debug.Log("Leaving " + _channelName);
+        _statusText.text = "Status:" +" " + _channelName.ToString()+ " " + "Left";
+         Debug.Log("Leaving " + _channelName);
         // Leave the channel
         RtcEngine.LeaveChannel();
         // Disable the audio module
@@ -105,8 +119,8 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     // Implement your own callback class by inheriting the IRtcEngineEventHandler interface class
     internal class UserEventHandler : IRtcEngineEventHandler
     {
-        private readonly JoinChannelAudio _audioSample;
-        internal UserEventHandler(JoinChannelAudio audioSample)
+        private readonly JoinAudioChannel _audioSample;
+        internal UserEventHandler(JoinAudioChannel audioSample)
         {
             _audioSample = audioSample;
         }
@@ -123,7 +137,10 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
         // This callback is triggered when a remote user leaves the current channel
         public override void OnUserOffline(RtcConnection connection, uint uid, USER_OFFLINE_REASON_TYPE reason)
         {
+            Debug.Log("Remote user Left");
         }
+
+       
     }
 
 }
