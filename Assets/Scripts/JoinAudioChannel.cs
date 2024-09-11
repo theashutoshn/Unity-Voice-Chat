@@ -84,6 +84,7 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     }
     public void Join()
     {
+        
         Debug.Log("Joining" + _channelName);
         _statusText.text = "Status:" + " " + _channelName.ToString()+ " " + "Joined";
         // Enable the audio module
