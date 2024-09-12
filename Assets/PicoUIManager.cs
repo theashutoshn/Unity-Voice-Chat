@@ -10,7 +10,9 @@ public class PicoUIManager : MonoBehaviour
 
     public TextMeshProUGUI statusText;
     public TextMeshProUGUI userText;
+    public TextMeshProUGUI microphoneText;
     public TextMeshProUGUI remoteUserText;
+    
     void Awake()
     {
         if (Instance == null)
@@ -46,6 +48,14 @@ public class PicoUIManager : MonoBehaviour
         if (remoteUserText != null)
         {
             remoteUserText.text = remote;
+        }
+    }
+
+    public void MicrophoneStatus(string mStatus)
+    {
+        if (userText != null)
+        {
+            microphoneText.text = mStatus;
         }
     }
 }

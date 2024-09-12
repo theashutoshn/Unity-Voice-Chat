@@ -25,6 +25,8 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     // Start is called before the first frame update
     private bool isMuted = false;
 
+    public GameObject muteButton;
+    public GameObject unMuteButton;
 
 
     void Start()
@@ -65,10 +67,11 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
         go.GetComponent<Button>().onClick.AddListener(Leave);
         go = GameObject.Find("Join");
         go.GetComponent<Button>().onClick.AddListener(Join);
-        go = GameObject.Find("Mute");
-        go.GetComponent<Button>().onClick.AddListener(MuteButton);
-        go = GameObject.Find("UnMute");
-        go.GetComponent<Button>().onClick.AddListener(UnMuteButton);
+        //go = GameObject.Find("MuteIcon");
+        //go.GetComponent<Button>().onClick.AddListener(ToggleButton);
+        //go = GameObject.Find("UnMuteIcon");
+        //go.GetComponent<Button>().onClick.AddListener(ToggleButton);
+        
 
 
     }
@@ -114,20 +117,38 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
         RtcEngine.DisableAudio();
     }
 
-    public void MuteButton()
+    public void ToggleButton()
     {
-        RtcEngine.MuteLocalAudioStream(true);
+        isMuted = !isMuted;
+        Mute(isMuted);
     }
+   
 
     public void Mute(bool mute)
     {
-        
+        if (RtcEngine != null)
+        {
+            // Mute or unmute the local audio stream
+            RtcEngine.MuteLocalAudioStream(mute);
+
+            if (mute)
+            {
+                muteButton.SetActive(true);
+                unMuteButton.SetActive(false);
+                Debug.Log("Microphone muted.");
+                PicoUIManager.Instance.MicrophoneStatus("Microphone: Muted");
+            }
+            else
+            {
+                muteButton.SetActive(false);
+                unMuteButton.SetActive(true);
+                Debug.Log("Microphone unmuted.");
+                PicoUIManager.Instance.MicrophoneStatus("Microphone: Unmuted");
+            }
+        }
     }
 
-    public void UnMuteButton()
-    {
-        RtcEngine.MuteLocalAudioStream(false);
-    }
+    
 
 
 
