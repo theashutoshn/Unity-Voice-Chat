@@ -23,9 +23,7 @@ public class JoinAudioChannel : MonoBehaviour
 private ArrayList permissionList = new ArrayList() { Permission.Microphone };
 #endif
     // Start is called before the first frame update
-    [SerializeField]
-    private TextMeshProUGUI _statusText;
-    //public TextMeshProUGUI  _remoteUserText;
+    
 
 
 
@@ -84,9 +82,9 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     }
     public void Join()
     {
-        
+        UIManager.Instance.StatusCheck("Channel Joined");
         Debug.Log("Joining" + _channelName);
-        _statusText.text = "Status:" + " " + _channelName.ToString()+ " " + "Joined";
+        
         // Enable the audio module
         RtcEngine.EnableAudio();
         // Set channel media options
@@ -104,7 +102,8 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     }
     public void Leave()
     {
-        _statusText.text = "Status:" +" " + _channelName.ToString()+ " " + "Left";
+        UIManager.Instance.StatusCheck("Channel Left");
+        
          Debug.Log("Leaving " + _channelName);
         // Leave the channel
         RtcEngine.LeaveChannel();
@@ -128,17 +127,19 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
         // This callback is triggered when the local user successfully joins the channel
         public override void OnJoinChannelSuccess(RtcConnection connection, int elapsed)
         {
+            UIManager.Instance.UserStatus("User Joined");
             Debug.Log("OnJoinChannelSuccess _channelName");
         }
         // This callback is triggered when a remote user successfully joins the channel
         public override void OnUserJoined(RtcConnection connection, uint uid, int elapsed)
         {
+            UIManager.Instance.RemoteUser("RemoteUser Joined");
             Debug.Log("Remote user joined");
         }
         // This callback is triggered when a remote user leaves the current channel
         public override void OnUserOffline(RtcConnection connection, uint uid, USER_OFFLINE_REASON_TYPE reason)
         {
-            Debug.Log("Remote user Left");
+            //Debug.Log("Remote user Left");
         }
 
        
