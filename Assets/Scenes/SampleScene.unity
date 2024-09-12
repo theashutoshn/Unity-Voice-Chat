@@ -867,7 +867,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e19739493a8734681c6d899069a04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statusText: {fileID: 487887450}
 --- !u!1 &793549024
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,9 +896,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98852518ae54a3d429e7c686e58aeff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusText: {fileID: 0}
-  userText: {fileID: 0}
-  remoteUserText: {fileID: 0}
+  statusText: {fileID: 487887450}
+  userText: {fileID: 1838800366}
+  remoteUserText: {fileID: 2013816970}
 --- !u!4 &793549026
 Transform:
   m_ObjectHideFlags: 0

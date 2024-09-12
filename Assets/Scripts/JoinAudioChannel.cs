@@ -13,13 +13,13 @@ using UnityEngine.Android;
 public class JoinAudioChannel : MonoBehaviour
 {
     // Fill in your app ID
-    private string _appID = "59fc3d61f2c040e29397e550c21db127";
+    private string _appID = "59fc3d61f2c040e29397e550c21db127"; 
     // Fill in your channel name
-    private string _channelName = "UnityAgoraVoice";
+    private string _channelName = "UnityVoiceTest";
     // Fill in a temporary token
-    private string _token = "007eJxTYOCb5rRK23kfW9719//Ot/PFX3O+EmRnWpURorkw/sYsBhsFBlPLtGTjFDPDNKNkAxODVCNLY0vzVFNTg2Qjw5QkQyNzT6cHaQ2BjAyfPBlZGBkgEMTnZwjNyyypdEzPL0oMy89MTmVgAABAziHU";
+    private string _token = "007eJxTYCgyy9zb2GzpONU4a6Pdt9ZzDlVLHzZMshG8zD5XoJnb6JUCg6llWrJxiplhmlGygYlBqpGlsaV5qqmpQbKRYUqSoZH5tP5HaQ2BjAwnDzMwMzJAIIjPxxCal1lSGZafmZwaklpcwsAAAEZjIoQ=";
     internal IRtcEngine RtcEngine;
-#if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID)
+#if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID) 
 private ArrayList permissionList = new ArrayList() { Permission.Microphone };
 #endif
     // Start is called before the first frame update
@@ -127,13 +127,13 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
         // This callback is triggered when the local user successfully joins the channel
         public override void OnJoinChannelSuccess(RtcConnection connection, int elapsed)
         {
-            UIManager.Instance.UserStatus("User Joined");
+            //UIManager.Instance.UserStatus("User Joined");
             Debug.Log("OnJoinChannelSuccess _channelName");
         }
         // This callback is triggered when a remote user successfully joins the channel
         public override void OnUserJoined(RtcConnection connection, uint uid, int elapsed)
         {
-            UIManager.Instance.RemoteUser("RemoteUser Joined");
+            //UIManager.Instance.RemoteUser("RemoteUser Joined");
             Debug.Log("Remote user joined");
         }
         // This callback is triggered when a remote user leaves the current channel
