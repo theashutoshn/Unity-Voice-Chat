@@ -1278,8 +1278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e19739493a8734681c6d899069a04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muteButton: {fileID: 0}
-  unMuteButton: {fileID: 0}
+  muteButton: {fileID: 878245468}
+  unMuteButton: {fileID: 886076813}
 --- !u!1 &495619581
 GameObject:
   m_ObjectHideFlags: 0
