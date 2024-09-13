@@ -15,16 +15,17 @@ public class JoinAudioChannel : MonoBehaviour
     // Fill in your app ID
     private string _appID = "59fc3d61f2c040e29397e550c21db127"; 
     // Fill in your channel name
-    private string _channelName = "UnityVoiceTest";
+    private string _channelName = "AgoraVoiceTest";
     // Fill in a temporary token
-    private string _token = "007eJxTYCgyy9zb2GzpONU4a6Pdt9ZzDlVLHzZMshG8zD5XoJnb6JUCg6llWrJxiplhmlGygYlBqpGlsaV5qqmpQbKRYUqSoZH5tP5HaQ2BjAwnDzMwMzJAIIjPxxCal1lSGZafmZwaklpcwsAAAEZjIoQ=";
+    private string _token = "007eJxTYOjK+fn89067JZoK5XmcL47uECxZ/Ovk6VnxeX9mZJ+K/h6gwGBqmZZsnGJmmGaUbGBikGpkaWxpnmpqapBsZJiSZGhknvricVpDICPDe/c9TIwMEAji8zE4pucXJYblZyanhqQWlzAwAADGDCbt";
     internal IRtcEngine RtcEngine;
 #if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID) 
 private ArrayList permissionList = new ArrayList() { Permission.Microphone };
 #endif
     // Start is called before the first frame update
-    
 
+    public GameObject muteButton;
+    public GameObject unMuteButton;
 
 
     void Start()
@@ -65,7 +66,11 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
         go.GetComponent<Button>().onClick.AddListener(Leave);
         go = GameObject.Find("Join");
         go.GetComponent<Button>().onClick.AddListener(Join);
-
+        //go = GameObject.Find("MuteIcon");
+        //go.GetComponent<Button>().onClick.AddListener(ToggleButton);
+        //go = GameObject.Find("UnMuteIcon");
+        //go.GetComponent<Button>().onClick.AddListener(ToggleButton);
+        
 
 
     }
@@ -73,7 +78,7 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     {
         // Create an IRtcEngine instance
         RtcEngine = Agora.Rtc.RtcEngine.CreateAgoraRtcEngine();
-        RtcEngineContext context = new RtcEngineContext();
+        RtcEngineContext context = new RtcEngineContext();  
         context.appId = _appID;
         context.channelProfile = CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_LIVE_BROADCASTING;
         context.audioScenario = AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_DEFAULT;
@@ -82,9 +87,10 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     }
     public void Join()
     {
-        UIManager.Instance.StatusCheck("Channel Joined");
+
+        PicoUIManager.Instance.StatusCheck("Status: " + _channelName.ToString() + " " + "Channel Joined");
         Debug.Log("Joining" + _channelName);
-        
+  
         // Enable the audio module
         RtcEngine.EnableAudio();
         // Set channel media options
@@ -102,14 +108,53 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     }
     public void Leave()
     {
-        UIManager.Instance.StatusCheck("Channel Left");
-        
+
+        PicoUIManager.Instance.StatusCheck("Status: " + _channelName.ToString() + " " + "Channel Left");        
          Debug.Log("Leaving " + _channelName);
         // Leave the channel
         RtcEngine.LeaveChannel();
         // Disable the audio module
         RtcEngine.DisableAudio();
     }
+
+    public void ToggleButton()
+    {
+        isMuted = !isMuted;
+        Mute(isMuted);
+    }
+   
+
+    public void Mute(bool mute)
+    {
+        if (RtcEngine != null)
+        {
+            // Mute or unmute the local audio stream
+            RtcEngine.MuteLocalAudioStream(mute);
+
+            if (mute)
+            {
+                muteButton.SetActive(true);
+                unMuteButton.SetActive(false);
+                Debug.Log("Microphone muted.");
+                PicoUIManager.Instance.MicrophoneStatus("Microphone: Muted");
+            }
+            else
+            {
+                muteButton.SetActive(false);
+                unMuteButton.SetActive(true);
+                Debug.Log("Microphone unmuted.");
+                PicoUIManager.Instance.MicrophoneStatus("Microphone: Unmuted");
+            }
+        }
+    }
+
+    
+
+
+
+
+
+
     // Create an instance of the user callback class and set the callback
     private void InitEventHandler()
     {
@@ -127,19 +172,20 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
         // This callback is triggered when the local user successfully joins the channel
         public override void OnJoinChannelSuccess(RtcConnection connection, int elapsed)
         {
-            //UIManager.Instance.UserStatus("User Joined");
+            PicoUIManager.Instance.UserStatus("User Status: " + "User Joined");
             Debug.Log("OnJoinChannelSuccess _channelName");
         }
         // This callback is triggered when a remote user successfully joins the channel
         public override void OnUserJoined(RtcConnection connection, uint uid, int elapsed)
         {
-            //UIManager.Instance.RemoteUser("RemoteUser Joined");
+            PicoUIManager.Instance.RemoteUser("Remote User Status: " + "Remote User Joined");
             Debug.Log("Remote user joined");
         }
         // This callback is triggered when a remote user leaves the current channel
         public override void OnUserOffline(RtcConnection connection, uint uid, USER_OFFLINE_REASON_TYPE reason)
         {
-            //Debug.Log("Remote user Left");
+            PicoUIManager.Instance.RemoteUser("Remote User Status: " + "Remote User Left");
+            Debug.Log("Remote user Left");
         }
 
        

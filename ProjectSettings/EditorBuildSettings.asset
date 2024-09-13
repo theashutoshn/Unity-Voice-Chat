@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PicoVoiceCall Scene.unity
     guid: a7bdf7da7ecfb634e82b100166fcc904
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/PicoVoiceCall_PicoCanvas.unity
     guid: dd54b07c32a7c8140a28d25c819b7967
   m_configObjects:
