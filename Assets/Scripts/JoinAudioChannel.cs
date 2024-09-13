@@ -15,9 +15,9 @@ public class JoinAudioChannel : MonoBehaviour
     // Fill in your app ID
     private string _appID = "59fc3d61f2c040e29397e550c21db127";
     // Fill in your channel name
-    private string _channelName = "PicoUnityAgora";
+    private string _channelName = "AgoraVoiceTest";
     // Fill in a temporary token
-    private string _token = "007eJxTYOjyCpNkeJskYndQPXy25+SS3cWr9ql1Wafnr+9p3WL975sCg6llWrJxiplhmlGygYlBqpGlsaV5qqmpQbKRYUqSoZF5/tRHaQ2BjAyv7vxhZGSAQBCfjyEgMzk/NC+zpNIxPb8okYEBAHGxI/g=";
+    private string _token = "007eJxTYOjK+fn89067JZoK5XmcL47uECxZ/Ovk6VnxeX9mZJ+K/h6gwGBqmZZsnGJmmGaUbGBikGpkaWxpnmpqapBsZJiSZGhknvricVpDICPDe/c9TIwMEAji8zE4pucXJYblZyanhqQWlzAwAADGDCbt";
     internal IRtcEngine RtcEngine;
 #if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID)
 private ArrayList permissionList = new ArrayList() { Permission.Microphone };
