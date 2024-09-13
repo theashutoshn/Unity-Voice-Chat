@@ -13,17 +13,16 @@ using UnityEngine.Android;
 public class JoinAudioChannel : MonoBehaviour
 {
     // Fill in your app ID
-    private string _appID = "59fc3d61f2c040e29397e550c21db127";
+    private string _appID = "59fc3d61f2c040e29397e550c21db127"; 
     // Fill in your channel name
     private string _channelName = "AgoraVoiceTest";
     // Fill in a temporary token
     private string _token = "007eJxTYOjK+fn89067JZoK5XmcL47uECxZ/Ovk6VnxeX9mZJ+K/h6gwGBqmZZsnGJmmGaUbGBikGpkaWxpnmpqapBsZJiSZGhknvricVpDICPDe/c9TIwMEAji8zE4pucXJYblZyanhqQWlzAwAADGDCbt";
     internal IRtcEngine RtcEngine;
-#if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID)
+#if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID) 
 private ArrayList permissionList = new ArrayList() { Permission.Microphone };
 #endif
     // Start is called before the first frame update
-    private bool isMuted = false;
 
     public GameObject muteButton;
     public GameObject unMuteButton;
@@ -88,9 +87,10 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     }
     public void Join()
     {
+
         PicoUIManager.Instance.StatusCheck("Status: " + _channelName.ToString() + " " + "Channel Joined");
         Debug.Log("Joining" + _channelName);
-       
+  
         // Enable the audio module
         RtcEngine.EnableAudio();
         // Set channel media options
@@ -108,8 +108,8 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     }
     public void Leave()
     {
-        PicoUIManager.Instance.StatusCheck("Status: " + _channelName.ToString() + " " + "Channel Left");
-        
+
+        PicoUIManager.Instance.StatusCheck("Status: " + _channelName.ToString() + " " + "Channel Left");        
          Debug.Log("Leaving " + _channelName);
         // Leave the channel
         RtcEngine.LeaveChannel();
