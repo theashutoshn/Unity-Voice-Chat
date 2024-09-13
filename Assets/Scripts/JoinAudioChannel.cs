@@ -15,15 +15,15 @@ public class JoinAudioChannel : MonoBehaviour
     // Fill in your app ID
     private string _appID = "59fc3d61f2c040e29397e550c21db127"; 
     // Fill in your channel name
-    private string _channelName = "AgoraVoiceTest";
+    private string _channelName = "UnityAgoraPico";
     // Fill in a temporary token
-    private string _token = "007eJxTYOjK+fn89067JZoK5XmcL47uECxZ/Ovk6VnxeX9mZJ+K/h6gwGBqmZZsnGJmmGaUbGBikGpkaWxpnmpqapBsZJiSZGhknvricVpDICPDe/c9TIwMEAji8zE4pucXJYblZyanhqQWlzAwAADGDCbt";
+    private string _token = "007eJxTYNiq8P2T2rXCT2eX/7n05a7w2e3nF6acTLs9e4vgLfngSi4ZBQZTy7Rk4xQzwzSjZAMTg1QjS2NL81RTU4NkI8OUJEMj84msT9IaAhkZriQaMjEyQCCIz8cQmpdZUumYnl+UGJCZnM/AAADhZiYZ";
     internal IRtcEngine RtcEngine;
 #if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID) 
 private ArrayList permissionList = new ArrayList() { Permission.Microphone };
 #endif
     // Start is called before the first frame update
-
+    private bool isMuted = false;
     public GameObject muteButton;
     public GameObject unMuteButton;
 
