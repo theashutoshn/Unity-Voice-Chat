@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PicoVoiceCall_PicoCanvas.unity
     guid: dd54b07c32a7c8140a28d25c819b7967
+  - enabled: 0
+    path: Assets/Scenes/PicoVoiceCall_PicoCanvas_02.unity
+    guid: 3a45f0c9bc9e0f64da72aac60f2646a7
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 72f7061eb67c5e6468589a01eaf80685,
       type: 2}

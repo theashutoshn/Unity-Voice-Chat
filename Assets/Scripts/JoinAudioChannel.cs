@@ -15,9 +15,9 @@ public class JoinAudioChannel : MonoBehaviour
     // Fill in your app ID
     private string _appID = "59fc3d61f2c040e29397e550c21db127"; 
     // Fill in your channel name
-    private string _channelName = "UnityAgoraPico";
+    private string _channelName = "MultiChannel";
     // Fill in a temporary token
-    private string _token = "007eJxTYNiq8P2T2rXCT2eX/7n05a7w2e3nF6acTLs9e4vgLfngSi4ZBQZTy7Rk4xQzwzSjZAMTg1QjS2NL81RTU4NkI8OUJEMj84msT9IaAhkZriQaMjEyQCCIz8cQmpdZUumYnl+UGJCZnM/AAADhZiYZ";
+    private string _token = "007eJxTYLg9tdXx76KQ7Hr/5Lube7qm5D2339Kc3CO37YRjOofpvz0KDKaWacnGKWaGaUbJBiYGqUaWxpbmqaamBslGhilJhkbma94+T2sIZGSYJzOHkZEBAkF8Hgbf0pySTOeMxLy81BwGBgDrhCRG";
     internal IRtcEngine RtcEngine;
 #if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID) 
 private ArrayList permissionList = new ArrayList() { Permission.Microphone };
@@ -38,6 +38,7 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     void Update()
     {
         CheckPermissions();
+        Join();
     }
     void OnApplicationQuit()
     {
@@ -53,19 +54,21 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
     {
         #if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID)
                     foreach (string permission in permissionList) {
-                            if (!Permission.HasUserAuthorizedPermission(permission)) 
-                            {
-                                Permission.RequestUserPermission(permission);
-                            }
+                         if (!Permission.HasUserAuthorizedPermission(permission)) 
+                         {
+                              Permission.RequestUserPermission(permission);
+                         }
                 }
                 #endif
     }
     private void SetupUI() // Button Assign
     {
-        GameObject go = GameObject.Find("Leave");
-        go.GetComponent<Button>().onClick.AddListener(Leave);
-        go = GameObject.Find("Join");
-        go.GetComponent<Button>().onClick.AddListener(Join);
+        //GameObject go = GameObject.Find("Leave");
+        //go.GetComponent<Button>().onClick.AddListener(Leave);
+        //go = GameObject.Find("Join");
+        //go.GetComponent<Button>().onClick.AddListener(Join);
+
+
         //go = GameObject.Find("MuteIcon");
         //go.GetComponent<Button>().onClick.AddListener(ToggleButton);
         //go = GameObject.Find("UnMuteIcon");

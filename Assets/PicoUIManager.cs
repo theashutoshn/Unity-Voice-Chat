@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class PicoUIManager : MonoBehaviour
 {
     public static PicoUIManager Instance;
@@ -57,5 +57,10 @@ public class PicoUIManager : MonoBehaviour
         {
             microphoneText.text = mStatus;
         }
+    }
+
+    public void NextScene()
+    {
+        SceneManager.LoadScene(1);
     }
 }
