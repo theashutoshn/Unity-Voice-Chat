@@ -15,9 +15,9 @@ public class JoinAudioChannel : MonoBehaviour
     // Fill in your app ID
     private string _appID = "59fc3d61f2c040e29397e550c21db127"; 
     // Fill in your channel name
-    private string _channelName = "MultiChannel";
+    private string _channelName = "AgoraReactTesting";
     // Fill in a temporary token
-    private string _token = "007eJxTYLg9tdXx76KQ7Hr/5Lube7qm5D2339Kc3CO37YRjOofpvz0KDKaWacnGKWaGaUbJBiYGqUaWxpbmqaamBslGhilJhkbma94+T2sIZGSYJzOHkZEBAkF8Hgbf0pySTOeMxLy81BwGBgDrhCRG";
+    private string _token = "007eJxTYNh9XD2196/uuW1m/3I+WpbaSkZPUTyZp2oYyn73Vvbyti8KDKaWacnGKWaGaUbJBiYGqUaWxpbmqaamBslGhilJhkbmjRUv0xoCGRlYNhYzMTJAIIgvyOCYnl+UGJSamFwSklpckpmXzsAAADCKJJk=";
     internal IRtcEngine RtcEngine;
 #if (UNITY_2018_3_OR_NEWER && UNITY_ANDROID) 
 private ArrayList permissionList = new ArrayList() { Permission.Microphone };

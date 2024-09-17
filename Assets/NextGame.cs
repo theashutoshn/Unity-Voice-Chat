@@ -22,17 +22,17 @@ public class NextGame : MonoBehaviour
 
         try
         {
-            // Get the current Android activity
+           
             AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
             AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 
-            // Get the package manager
+            
             AndroidJavaObject packageManager = currentActivity.Call<AndroidJavaObject>("getPackageManager");
 
-            // Create an intent to launch the app
+           
             AndroidJavaObject intent = packageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage", game2PackageName);
 
-            // If the intent is null, the app is not installed
+           
             if (intent != null)
             {
                 // Start the app
@@ -55,12 +55,12 @@ public class NextGame : MonoBehaviour
 
     private void CloseGame1()
     {
-        // Call this to stop Game1 from running in the background
+        
         AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-        currentActivity.Call("finish"); // Finish the activity and close the app
+        currentActivity.Call("finish"); // finish the activity and close the app
 
-        // Alternatively, you can kill the process to ensure it fully closes
-       // System.Diagnostics.Process.GetCurrentProcess().Kill();
+        
+       //System.Diagnostics.Process.GetCurrentProcess().Kill(); // to completely kill the application
     }
 }
