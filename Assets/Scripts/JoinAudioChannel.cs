@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,19 @@ using UnityEngine.Android;
 #endif
 
 
+[System.Serializable]
+public class AudioPayload
+{
+    public string app_id;
+    public string channel_name;
+    public string token;
+}
+
+
 public class JoinAudioChannel : MonoBehaviour
 {
+    private WebRequestHelper webRequestHelper;
+
     // Fill in your app ID
     private string _appID = "59fc3d61f2c040e29397e550c21db127"; 
     // Fill in your channel name
@@ -33,6 +45,29 @@ private ArrayList permissionList = new ArrayList() { Permission.Microphone };
         SetupAudioSDKEngine();
         InitEventHandler();
         SetupUI();
+
+        webRequestHelper = gameObject.AddComponent<WebRequestHelper>();
+
+        AudioPayload payload = new AudioPayload
+        {
+            app_id = _appID,
+            channel_name= _channelName,
+            token =_token
+        };
+
+        string jsonString = JsonUtility.ToJson(payload);
+
+        StartCoroutine(webRequestHelper.PostRequest("http://localhost:5000/submit-agoda-id", jsonString, (error, response) =>
+        {
+            if (error == null)
+            {
+                Debug.Log("POST Response: " + response);
+            }
+            else
+            {
+                Debug.LogError("POST Error: " + error);
+            }
+        }));
     }
     // Update is called once per frame
     void Update()
